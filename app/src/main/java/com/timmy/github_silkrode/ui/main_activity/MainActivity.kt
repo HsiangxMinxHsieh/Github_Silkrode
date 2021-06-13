@@ -66,7 +66,7 @@ class MainActivity : BaseActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
-//        mBinding.tabs.setupWithViewPager(mBinding.viewPager)
+
         //頁面滑動後應觸動下方按鈕
         mBinding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {

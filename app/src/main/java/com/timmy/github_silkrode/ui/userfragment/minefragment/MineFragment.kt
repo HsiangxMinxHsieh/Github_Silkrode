@@ -1,24 +1,26 @@
 package com.timmy.github_silkrode.ui.userfragment.minefragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.timmy.github_silkrode.R
 import com.timmy.github_silkrode.base.BaseFragment
+import com.timmy.github_silkrode.databinding.FragmentMineBinding
+import com.timmy.github_silkrode.databinding.FragmentUserBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MineFragment : BaseFragment() {
+class MineFragment : BaseFragment<FragmentMineBinding>(FragmentMineBinding::inflate) {
 
     private val mViewModel: MineViewModel by viewModels()
 
-    override val layoutId: Int = R.layout.fragment_mine
-
-//    private val mAdapter: HomePagedAdapter = HomePagedAdapter()
+//    private val mAdapter: UserPagedAdapter = UserPagedAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        toolbar.inflateMenu(R.menu.menu_home_search)
+
         binds()
 //
 //        mRecyclerView.adapter = mAdapter
