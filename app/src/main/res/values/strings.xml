@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Github</string>
+
+    <string name="nav_user">User</string>
+    <string name="nav_mine">Mine</string>
+
+
+    <string name="mine_github_title">GitHub Docs</string>
+
+</resources>
