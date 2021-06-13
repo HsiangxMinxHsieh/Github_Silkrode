@@ -10,8 +10,10 @@
 
     <color name="user_divider">#FFEBEBEB</color>
 
-    <color name="text_dark">#FF212121</color>
-    <color name="text_gray">#FF212121</color>
+    <color name="dark">#FF212121</color>
+    <color name="text_gray">#FF737373</color><!--Item內User灰色-->
+    <color name="text_gray2">#FF898989</color><!--Mine內文字灰色-->
+    <color name="text_gray3">#FF757575</color><!--UserInfo內文字灰色-->
 
     <color name="transparent">#00000000</color>
     <color name="background">#FFFAFAFA</color>

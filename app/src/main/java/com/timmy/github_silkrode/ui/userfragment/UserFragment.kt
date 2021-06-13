@@ -29,6 +29,7 @@ import com.timmy.github_silkrode.databinding.FragmentUserBinding
 import com.timmy.github_silkrode.databinding.ItemUsersBinding
 import com.timmy.github_silkrode.db.ReceivedEvent
 import com.timmy.github_silkrode.db.Type
+import com.timmy.github_silkrode.ext.observe
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,16 +37,33 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
 
     private val mViewModel: UserViewModel by viewModels()
 
-//    private val mAdapter: UserPagedAdapter = UserPagedAdapter()
+    private val mAdapter: UserPagedAdapter = UserPagedAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        mBinding = DataBindingUtil.setContentView(activity as Activity,R.layout.fragment_user) as FragmentUserBinding
 
-        binds()
-//
+        initView()
+
+        initEvent()
+
+
 //        mRecyclerView.adapter = mAdapter
 //        mRecyclerView.removeAllAnimation()
+    }
+
+    private fun initView() {
+        mBinding.mRecyclerView.apply{
+            adapter = mAdapter
+        }
+
+//        observe(mViewModel.eventListLiveData) {
+//            mAdapter.submitData(lifecycle, it)
+//            mBinding.mRecyclerView.scrollToPosition(0)
+//        }
+    }
+
+    private fun initEvent() {
     }
 
     private fun binds() {
@@ -123,7 +141,7 @@ class UserPagedAdapter : PagingDataAdapter<ReceivedEvent, UserPagedViewHolder>(d
             .apply(RequestOptions().circleCrop())
             .into(binding.ivAvatar)
 
-        binding.tvOwnerName.text = data.name
+        binding.tvName.text = data.name
 
 
 //        ivEventType.setImageDrawable(

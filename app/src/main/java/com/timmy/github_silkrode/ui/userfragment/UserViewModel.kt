@@ -14,11 +14,11 @@ import javax.inject.Inject
 @HiltViewModel
 @SuppressWarnings("checkResult")
 class UserViewModel @Inject constructor(
-        repository: UserRepository
+    repository: UserRepository
 ) : BaseViewModel() {
 
-    @OptIn(androidx.paging.ExperimentalPagingApi::class)
+    @OptIn(ExperimentalPagingApi::class)
     val eventListLiveData: LiveData<PagingData<ReceivedEvent>> =
-            repository.fetchPager().flow.cachedIn(viewModelScope).asLiveData()
+        repository.fetchPager().flow.cachedIn(viewModelScope).asLiveData()
 
 }

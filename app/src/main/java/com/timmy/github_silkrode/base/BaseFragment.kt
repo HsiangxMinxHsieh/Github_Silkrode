@@ -24,24 +24,4 @@ abstract class BaseFragment<VB: ViewBinding>( private val inflate: Inflate<VB>) 
         super.onDestroyView()
         _binding = null
     }
-
-//
-//    lateinit var mBinding: ViewDataBinding
-//    abstract val layoutId: Int
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        logi("onCreateView","layoutId 是===>$layoutId")
-//        mBinding = DataBindingUtil.setContentView(activity as Activity, layoutId) as ViewDataBinding
-//        logi("onCreateView","mBinding 是===>$mBinding")
-//        return mBinding.root
-//    }
-//
-////    override fun onDestroyView() {
-////        super.onDestroyView()
-////        mRootView = null
-////    }
 }

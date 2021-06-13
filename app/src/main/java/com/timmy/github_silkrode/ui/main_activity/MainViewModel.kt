@@ -1,9 +1,18 @@
 package com.timmy.github_silkrode.ui.main_activity
 
+import androidx.lifecycle.viewModelScope
 import com.timmy.github_silkrode.base.BaseViewModel
+import com.timmy.github_silkrode.base.Results
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
-class MainViewModel @Inject constructor() : BaseViewModel()
+class MainViewModel @Inject constructor(private val repo: MainRepository) : BaseViewModel() {
+    fun login() {
+        viewModelScope.launch {
+            val result = repo.login()
+        }
+    }
+}

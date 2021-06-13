@@ -1,5 +1,6 @@
-package util
+package com.timmy.github_silkrode.ext
 
+import util.DateTool
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

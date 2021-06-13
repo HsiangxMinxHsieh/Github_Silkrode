@@ -12,7 +12,7 @@ import com.timmy.github_silkrode.api.ServiceManager
 import com.timmy.github_silkrode.db.ReceivedEvent
 import com.timmy.github_silkrode.db.UserDatabase
 import androidx.room.withTransaction
-import util.globalPagingConfig
+import com.timmy.github_silkrode.ext.globalPagingConfig
 
 class UserRepository @Inject constructor(
     remoteDataSource: UserRemoteDataSource,

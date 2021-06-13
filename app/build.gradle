@@ -17,6 +17,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //由local.properties讀入access Token 以存取github API。
+        Properties properties = new Properties()
+
+        final File propertiesFile = project.rootProject.file('local.properties')
+        if (propertiesFile != null && propertiesFile.exists()) {
+            properties.load(propertiesFile.newDataInputStream())
+            buildConfigField "String", "USER_ACCESS_TOKEN", properties.getProperty("USER_ACCESS_TOKEN")
+        }
     }
 
     buildTypes {

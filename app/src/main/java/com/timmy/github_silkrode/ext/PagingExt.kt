@@ -1,4 +1,4 @@
-package util
+package com.timmy.github_silkrode.ext
 
 import androidx.annotation.AnyThread
 import androidx.paging.PagingConfig

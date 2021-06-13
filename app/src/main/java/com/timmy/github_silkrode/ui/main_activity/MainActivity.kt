@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.widget.TableLayout
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
@@ -24,23 +25,19 @@ import util.logi
 @Suppress("PLUGIN_WARNING")
 @SuppressLint("CheckResult")
 @AndroidEntryPoint
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }){
     val TAG = javaClass.simpleName
     private val activity = this
     private val context: Context = this
-
-    lateinit var mBinding: ActivityMainBinding
+    private val mViewModel: MainViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //隱藏標題列
-        supportActionBar?.hide()
-
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         initView()
 
         initEvent()
 
+        mViewModel.login()
     }
 
     private fun initView() {

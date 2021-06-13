@@ -6,10 +6,10 @@ import retrofit2.http.*
 
 interface UserService {
 
-    @GET("user")
+    @GET("users/HsiangxMinxHsieh")
     suspend fun fetchUserOwner(@Header("Authorization") authorization: String): Response<UserInfo>
 
-    @GET("users/{username}/received_events?")
+    @GET("users")
     suspend fun queryReceivedEvents(@Path("username") username: String,
                                     @Query("page") pageIndex: Int,
                                     @Query("per_page") perPage: Int): List<ReceivedEvent>

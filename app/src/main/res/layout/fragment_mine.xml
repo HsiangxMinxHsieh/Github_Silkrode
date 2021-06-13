@@ -80,13 +80,133 @@
             android:layout_height="0dp"
             android:background="@color/white"
             android:src="@drawable/ic_github_avatar_default"
-            app:layout_constraintHorizontal_bias="0.04"
             app:layout_constraintBottom_toTopOf="@+id/vv_anchor"
             app:layout_constraintDimensionRatio="1.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.155524446"
+            app:layout_constraintHorizontal_bias="0.04"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vv_anchor" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_mine_avatar">
+
+            <TextView
+                android:id="@+id/tv_your_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Name"
+                android:textColor="@color/dark"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_your_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your login"
+                android:textColor="@color/text_gray"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_your_name" />
+
+            <LinearLayout
+                android:id="@+id/ll_followers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center|start"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tv_your_login">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_mine_followers" />
+
+                <TextView
+                    android:id="@+id/tv_followers_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="2"
+                    android:textColor="@color/dark"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_followers_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="followers"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/dot_after_followers"
+                    android:layout_width="3dp"
+                    android:layout_height="3dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/dot_circle" />
+
+                <TextView
+                    android:id="@+id/tv_following_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="1"
+                    android:textColor="@color/dark"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_following_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="following"
+                    android:textColor="@color/text_gray"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/dot_after_following"
+                    android:layout_width="3dp"
+                    android:layout_height="3dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@drawable/dot_circle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/ll_followers">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_mine_mail" />
+
+                <TextView
+                    android:layout_marginStart="4dp"
+                    android:id="@+id/tv_your_email"
+                    android:textColor="@color/dark"
+                    android:text="your_email@gmail.com"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

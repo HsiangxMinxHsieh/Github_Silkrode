@@ -2,13 +2,11 @@ package com.timmy.github_silkrode.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.timmy.github_silkrode.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -17,7 +15,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object HttpModule {
-    const val TIME_OUT_SECONDS = 10
+    const val TIME_OUT_SECONDS = 10L
     const val BASE_URL = "https://api.github.com/"
 
     @Provides
@@ -34,21 +32,9 @@ object HttpModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-                .connectTimeout(
-                        TIME_OUT_SECONDS.toLong(),
-                        TimeUnit.SECONDS)
-                .readTimeout(
-                        TIME_OUT_SECONDS.toLong(),
-                        TimeUnit.SECONDS)
-                .addInterceptor(
-                        HttpLoggingInterceptor().apply {
-                            level = when (BuildConfig.DEBUG) {
-                                true -> HttpLoggingInterceptor.Level.BODY
-                                false -> HttpLoggingInterceptor.Level.NONE
-                            }
-                        }
-                )
-                .build()
+            .readTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
+            .connectTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
+            .build()
     }
 
     @Provides
