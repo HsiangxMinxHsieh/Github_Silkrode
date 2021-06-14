@@ -28,7 +28,6 @@ data class ReceivedEvent(
     @ColumnInfo(name = "location")
     val location: String = "",
 ):Serializable {
-    var indexInResponse: Int = -1
 }
 
 data class Actor(

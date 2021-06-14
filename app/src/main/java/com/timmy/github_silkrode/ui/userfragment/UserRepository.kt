@@ -72,7 +72,7 @@ class UserLocalDataSource @Inject constructor(private val db: UserDatabase) : IL
     private suspend fun insertDataInternal(newPage: List<ReceivedEvent>) {
         val start = db.userReceivedEventDao().getNextIndexInReceivedEvents() ?: 0
         val items = newPage.mapIndexed { index, child ->
-            child.indexInResponse = start + index
+//            child.indexInResponse = start + index
             child
         }
         db.userReceivedEventDao().insert(items)

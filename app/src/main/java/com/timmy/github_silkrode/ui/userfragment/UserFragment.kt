@@ -23,6 +23,7 @@ import com.timmy.github_silkrode.db.ReceivedEvent
 import com.timmy.github_silkrode.ext.observe
 import com.timmy.github_silkrode.ui.use_rinfo_activity.UserInfoActivity
 import dagger.hilt.android.AndroidEntryPoint
+import util.options
 
 @AndroidEntryPoint
 class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::inflate) {
@@ -47,7 +48,6 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
         if (UserManager.isThingInitialized)
             observe(mViewModel.eventListLiveData) {
                 mAdapter.submitData(lifecycle, it)
-                mBinding.mRecyclerView.scrollToPosition(0)
             }
     }
 
@@ -102,9 +102,11 @@ class UserPagedViewHolder(var binding: ItemUsersBinding) : androidx.recyclerview
     fun binds(data: ReceivedEvent, position: Int, liveData: MutableLiveData<ReceivedEvent>) {
         Glide.with(binding.root.context)
             .load(data.avatarUrl)
-            .apply(RequestOptions().circleCrop())
+            .apply(options)
             .into(binding.ivAvatar)
-        liveData.postValue(data)
+        binding.clContent.setOnClickListener {
+            liveData.postValue(data)
+        }
         binding.tvName.text = data.login
 
 

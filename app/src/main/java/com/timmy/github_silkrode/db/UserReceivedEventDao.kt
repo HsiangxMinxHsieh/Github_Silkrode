@@ -15,7 +15,7 @@ interface UserReceivedEventDao {
     suspend fun insert(receivedEvents: List<ReceivedEvent>)
 
     @WorkerThread
-    @Query("SELECT * FROM user_received_events ORDER BY indexInResponse ASC")
+    @Query("SELECT * FROM user_received_events ORDER BY id ASC")
     fun queryEvents(): PagingSource<Int, ReceivedEvent>
 
     @WorkerThread
@@ -23,6 +23,6 @@ interface UserReceivedEventDao {
     suspend fun clearReceivedEvents()
 
     @WorkerThread
-    @Query("SELECT MAX(indexInResponse) + 1 FROM user_received_events")
+    @Query("SELECT MAX(id) + 1 FROM user_received_events")
     suspend fun getNextIndexInReceivedEvents(): Int?
 }
