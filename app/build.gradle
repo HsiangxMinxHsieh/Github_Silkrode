@@ -21,7 +21,7 @@ android {
         //由local.properties讀入access Token 以存取github API。
         Properties properties = new Properties()
 
-        final File propertiesFile = project.rootProject.file('access_token.properties')
+        final File propertiesFile = project.rootProject.file('access_token.txt')
         if (propertiesFile != null && propertiesFile.exists()) {
             properties.load(propertiesFile.newDataInputStream())
             buildConfigField "String", "USER_ACCESS_TOKEN", properties.getProperty("USER_ACCESS_TOKEN")
