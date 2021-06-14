@@ -1,4 +1,4 @@
-package com.timmy.github_silkrode.ui.userfragment.minefragment
+package com.timmy.github_silkrode.ui.minefragment
 
 import android.os.Bundle
 import android.view.View
@@ -16,15 +16,10 @@ class MineFragment : BaseFragment<FragmentMineBinding>(FragmentMineBinding::infl
 
     private val mViewModel: MineViewModel by viewModels()
 
-//    private val mAdapter: UserPagedAdapter = UserPagedAdapter()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binds()
-//
-//        mRecyclerView.adapter = mAdapter
-//        mRecyclerView.removeAllAnimation()
     }
 
     private fun binds() {

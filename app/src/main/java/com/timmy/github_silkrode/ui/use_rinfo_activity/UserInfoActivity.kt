@@ -2,27 +2,12 @@ package com.timmy.github_silkrode.ui.use_rinfo_activity
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
-import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Priority
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.tabs.TabLayout
-import com.timmy.github_silkrode.R
 import com.timmy.github_silkrode.base.BaseActivity
-import com.timmy.github_silkrode.base.ViewPagerAdapter
-import com.timmy.github_silkrode.databinding.ActivityMainBinding
 import com.timmy.github_silkrode.databinding.ActivityUserInfoBinding
 import com.timmy.github_silkrode.db.ReceivedEvent
-import com.timmy.github_silkrode.ui.userfragment.UserFragment
-import com.timmy.github_silkrode.ui.userfragment.minefragment.MineFragment
 import dagger.hilt.android.AndroidEntryPoint
 import util.options
 import java.lang.Exception
@@ -41,7 +26,6 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>({ ActivityUserInf
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         initData()
 
         initView()
@@ -51,7 +35,6 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding>({ ActivityUserInf
 
     private fun initData() {
         val bundle = intent.extras
-        var s = ""
         if (bundle != null) {
             userData = bundle.get(DATA_LIST_CLICK) as ReceivedEvent
         }

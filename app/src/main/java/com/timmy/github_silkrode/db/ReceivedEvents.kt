@@ -4,6 +4,7 @@ import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import util.fromJson
 import util.toJson
+import java.io.Serializable
 
 @TypeConverters(ReceivedEventsPersistentConverter::class)
 @Entity(tableName = "user_received_events")
@@ -21,12 +22,12 @@ data class ReceivedEvent(
     @ColumnInfo(name = "login")
     val login: String = "",     // Simple Name
 
-//    @ColumnInfo(name = "name")
-//    val name: String = "",      // Full Name
+    @ColumnInfo(name = "name")
+    val name: String = "",      // Full Name
 
     @ColumnInfo(name = "location")
     val location: String = "",
-) {
+):Serializable {
     var indexInResponse: Int = -1
 }
 

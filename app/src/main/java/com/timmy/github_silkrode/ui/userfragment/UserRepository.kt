@@ -7,7 +7,7 @@ import com.timmy.github_silkrode.ui.mvvm_util.ILocalDataSource
 import com.timmy.github_silkrode.ui.mvvm_util.IRemoteDataSource
 import javax.inject.Inject
 import androidx.paging.*
-import com.qingmei2.sample.PAGING_REMOTE_PAGE_SIZE
+import com.timmy.github_silkrode.PAGING_REMOTE_PAGE_SIZE
 import com.timmy.github_silkrode.api.ServiceManager
 import com.timmy.github_silkrode.db.ReceivedEvent
 import com.timmy.github_silkrode.db.UserDatabase
@@ -107,9 +107,9 @@ class UserRemoteMediator(
                 localDataSource.insertNewPagedEventData(data)
             }
             MediatorResult.Success(data.isEmpty())
-        } catch (exception: Exception) {
-//            toast (exception.toString())
-            MediatorResult.Error(exception)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            MediatorResult.Error(e)
         }
     }
 

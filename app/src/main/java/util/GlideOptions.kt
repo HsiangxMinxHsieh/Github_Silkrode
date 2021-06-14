@@ -13,6 +13,4 @@ val options by lazy {
         .transform(MultiTransformation(CenterCrop(), CircleCrop()))
         .priority(Priority.NORMAL)
         .error(R.drawable.ic_github_avatar_default)
-//            .diskCacheStrategy(DiskCacheStrategy.NONE)
-//            .skipMemoryCache(true)
 }

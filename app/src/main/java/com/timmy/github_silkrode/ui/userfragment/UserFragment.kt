@@ -1,5 +1,6 @@
 package com.timmy.github_silkrode.ui.userfragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.timmy.github_silkrode.databinding.FragmentUserBinding
 import com.timmy.github_silkrode.databinding.ItemUsersBinding
 import com.timmy.github_silkrode.db.ReceivedEvent
 import com.timmy.github_silkrode.ext.observe
+import com.timmy.github_silkrode.ui.use_rinfo_activity.UserInfoActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,6 +52,13 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
     }
 
     private fun initEvent() {
+        observe(mAdapter.observeItemEvent(),this::toUserInfoActivity)
+    }
+
+    private fun toUserInfoActivity(data:ReceivedEvent){
+        val intent = Intent(activity,UserInfoActivity::class.java)
+        intent.putExtra(UserInfoActivity.DATA_LIST_CLICK,data)
+        startActivity(intent)
     }
 
 }
@@ -57,22 +66,18 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
 
 class UserPagedAdapter : PagingDataAdapter<ReceivedEvent, UserPagedViewHolder>(diffCallback) {
 
-    private val itemEventObservable: MutableLiveData<String> = MutableLiveData()
+    private val itemEventObservable: MutableLiveData<ReceivedEvent> = MutableLiveData()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserPagedViewHolder {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(parent.context), R.layout.item_users, parent, false) as ItemUsersBinding
-        val viewHolder = UserPagedViewHolder(binding)
-        if (viewType == 0) {
-            //根據不同的 viewType 改變 view 風格
-        }
-        return viewHolder
+        return UserPagedViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: UserPagedViewHolder, position: Int) {
         holder.binds(getItem(position)!!, position, itemEventObservable)
     }
 
-    fun observeItemEvent(): LiveData<String> {
+    fun observeItemEvent(): LiveData<ReceivedEvent> {
         return itemEventObservable
     }
 
@@ -94,12 +99,12 @@ class UserPagedAdapter : PagingDataAdapter<ReceivedEvent, UserPagedViewHolder>(d
 class UserPagedViewHolder(var binding: ItemUsersBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
 
-    fun binds(data: ReceivedEvent, position: Int, liveData: MutableLiveData<String>) {
+    fun binds(data: ReceivedEvent, position: Int, liveData: MutableLiveData<ReceivedEvent>) {
         Glide.with(binding.root.context)
             .load(data.avatarUrl)
             .apply(RequestOptions().circleCrop())
             .into(binding.ivAvatar)
-
+        liveData.postValue(data)
         binding.tvName.text = data.login
 
 

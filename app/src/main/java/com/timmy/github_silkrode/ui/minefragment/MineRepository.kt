@@ -1,4 +1,4 @@
-package com.timmy.github_silkrode.ui.userfragment.minefragment
+package com.timmy.github_silkrode.ui.minefragment
 
 import com.timmy.github_silkrode.api.ServiceManager
 import com.timmy.github_silkrode.ui.mvvm_util.BaseRepositoryRemote

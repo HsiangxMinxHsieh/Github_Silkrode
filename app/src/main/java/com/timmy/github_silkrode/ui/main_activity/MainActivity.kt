@@ -2,27 +2,16 @@ package com.timmy.github_silkrode.ui.main_activity
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.UserManager
-import android.util.Log
-import android.view.Window
-import android.widget.TableLayout
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.timmy.github_silkrode.R
 import com.timmy.github_silkrode.base.BaseActivity
 import com.timmy.github_silkrode.base.ViewPagerAdapter
 import com.timmy.github_silkrode.databinding.ActivityMainBinding
 import com.timmy.github_silkrode.ui.userfragment.UserFragment
-import com.timmy.github_silkrode.ui.userfragment.minefragment.MineFragment
+import com.timmy.github_silkrode.ui.minefragment.MineFragment
 import dagger.hilt.android.AndroidEntryPoint
-import util.logi
 
 @Suppress("PLUGIN_WARNING")
 @SuppressLint("CheckResult")

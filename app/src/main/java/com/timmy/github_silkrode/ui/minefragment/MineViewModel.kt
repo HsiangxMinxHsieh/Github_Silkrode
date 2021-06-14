@@ -1,4 +1,4 @@
-package com.timmy.github_silkrode.ui.userfragment.minefragment
+package com.timmy.github_silkrode.ui.minefragment
 
 import androidx.lifecycle.MutableLiveData
 import com.timmy.github_silkrode.base.BaseViewModel
