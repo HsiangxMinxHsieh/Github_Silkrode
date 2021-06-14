@@ -15,6 +15,7 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : Base
     fun login() {
         viewModelScope.launch {
             val result = repo.login()
+
             getDataOK.postValue(true)
         }
     }

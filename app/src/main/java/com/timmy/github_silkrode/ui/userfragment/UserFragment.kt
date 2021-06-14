@@ -136,7 +136,8 @@ class UserPagedAdapter : PagingDataAdapter<ReceivedEvent, UserPagedViewHolder>(d
             .apply(RequestOptions().circleCrop())
             .into(binding.ivAvatar)
 
-        binding.tvName.text = data.name
+        binding.tvName.text = data.login
+
 
 
 //        ivEventType.setImageDrawable(

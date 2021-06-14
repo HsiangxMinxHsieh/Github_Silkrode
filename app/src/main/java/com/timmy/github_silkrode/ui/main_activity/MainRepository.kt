@@ -6,18 +6,13 @@ import com.timmy.github_silkrode.ui.mvvm_util.BaseRepositoryBoth
 import com.timmy.github_silkrode.ui.mvvm_util.ILocalDataSource
 import com.timmy.github_silkrode.ui.mvvm_util.IRemoteDataSource
 import javax.inject.Inject
-import androidx.paging.*
-import com.qingmei2.sample.PAGING_REMOTE_PAGE_SIZE
 import com.timmy.github_silkrode.api.ServiceManager
-import com.timmy.github_silkrode.db.ReceivedEvent
 import com.timmy.github_silkrode.db.UserDatabase
-import androidx.room.withTransaction
 import com.timmy.github_silkrode.BuildConfig
 import com.timmy.github_silkrode.api.UserInfo
 import com.timmy.github_silkrode.base.Results
-import com.timmy.github_silkrode.ext.globalPagingConfig
 import com.timmy.github_silkrode.ext.processApiResponse
-import kotlinx.coroutines.flow.Flow
+import util.loge
 import util.logi
 
 class MainRepository @Inject constructor(
@@ -29,7 +24,7 @@ class MainRepository @Inject constructor(
         val userInfo = remoteDataSource.login()
         when (userInfo) {
             is Results.Failure -> {
-                logi("login", "fail!")
+                loge("login", "fail!")
             }
             is Results.Success -> UserManager.INSTANCE = requireNotNull(userInfo.data)
         }
