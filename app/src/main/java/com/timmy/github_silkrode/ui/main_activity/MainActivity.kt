@@ -5,12 +5,14 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.UserManager
 import android.util.Log
 import android.view.Window
 import android.widget.TableLayout
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.timmy.github_silkrode.R
@@ -33,11 +35,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initView()
-
-        initEvent()
-
         mViewModel.login()
+
+       initObserver()
+
+
+    }
+
+    private fun initObserver() {
+        mViewModel.getDataOK.observe(activity,  {
+            initView()
+
+            initEvent()
+
+        })
     }
 
     private fun initView() {

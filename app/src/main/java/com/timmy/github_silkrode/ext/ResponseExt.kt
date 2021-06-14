@@ -11,7 +11,6 @@ inline fun <T> processApiResponse(request: () -> Response<T>): Results<T> {
         val response = request()
         val responseCode = response.code()
         val responseMessage = response.message()
-        logi("login","登入結果是===>$response")
         if (response.isSuccessful) {
             Results.success(response.body()!!)
         } else {

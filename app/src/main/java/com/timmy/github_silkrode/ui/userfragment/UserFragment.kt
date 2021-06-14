@@ -41,26 +41,21 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        mBinding = DataBindingUtil.setContentView(activity as Activity,R.layout.fragment_user) as FragmentUserBinding
 
         initView()
 
         initEvent()
 
-
-//        mRecyclerView.adapter = mAdapter
-//        mRecyclerView.removeAllAnimation()
     }
 
     private fun initView() {
         mBinding.mRecyclerView.apply{
             adapter = mAdapter
         }
-
-//        observe(mViewModel.eventListLiveData) {
-//            mAdapter.submitData(lifecycle, it)
-//            mBinding.mRecyclerView.scrollToPosition(0)
-//        }
+        observe(mViewModel.eventListLiveData) {
+            mAdapter.submitData(lifecycle, it)
+            mBinding.mRecyclerView.scrollToPosition(0)
+        }
     }
 
     private fun initEvent() {

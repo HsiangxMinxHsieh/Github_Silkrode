@@ -39,6 +39,4 @@ object HttpModule{
         .baseUrl(BASE_URL)
         .client(okHttpClient)
         .build()
-
-
 }

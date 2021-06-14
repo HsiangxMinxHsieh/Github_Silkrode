@@ -21,7 +21,7 @@ class UserRepository @Inject constructor(
 
     @ExperimentalPagingApi
     fun fetchPager(): Pager<Int, ReceivedEvent> {
-        val username: String = UserManager.INSTANCE.login
+        val username: String = UserManager.INSTANCE!!.login
         val remoteMediator = UserRemoteMediator(username, remoteDataSource, localDataSource)
         return Pager(
                 config = globalPagingConfig,
