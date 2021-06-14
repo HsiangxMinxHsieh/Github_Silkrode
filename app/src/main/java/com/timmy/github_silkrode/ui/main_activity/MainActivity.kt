@@ -27,7 +27,7 @@ import util.logi
 @Suppress("PLUGIN_WARNING")
 @SuppressLint("CheckResult")
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }){
+class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inflate(it) }) {
     val TAG = javaClass.simpleName
     private val activity = this
     private val context: Context = this
@@ -37,14 +37,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
 
         mViewModel.login()
 
-       initObserver()
+        initObserver()
 
 
     }
 
     private fun initObserver() {
-        mViewModel.getDataOK.observe(activity,  {
-            initView()
+        mViewModel.getDataOK.observe(activity, {
+                initView()
 
             initEvent()
 

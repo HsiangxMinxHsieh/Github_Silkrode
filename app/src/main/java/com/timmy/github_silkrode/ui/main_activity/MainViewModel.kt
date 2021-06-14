@@ -16,7 +16,11 @@ class MainViewModel @Inject constructor(private val repo: MainRepository) : Base
         viewModelScope.launch {
             val result = repo.login()
 
-            getDataOK.postValue(true)
+            when (result) {
+                is Results.Failure -> getDataOK.postValue(false)
+                is Results.Success -> getDataOK.postValue(true)
+            }
+
         }
     }
 }

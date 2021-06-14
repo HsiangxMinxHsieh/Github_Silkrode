@@ -1,16 +1,12 @@
 package com.timmy.github_silkrode.ui.userfragment.minefragment
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.timmy.github_silkrode.R
+import com.timmy.github_silkrode.api.UserManager
 import com.timmy.github_silkrode.base.BaseFragment
 import com.timmy.github_silkrode.databinding.FragmentMineBinding
-import com.timmy.github_silkrode.databinding.FragmentUserBinding
 import com.timmy.github_silkrode.ext.observe
 import dagger.hilt.android.AndroidEntryPoint
 import util.options
@@ -32,15 +28,14 @@ class MineFragment : BaseFragment<FragmentMineBinding>(FragmentMineBinding::infl
     }
 
     private fun binds() {
-
-        observe(mViewModel.viewStateLiveData, this::onNewState)
+        if (UserManager.isThingInitialized)
+            observe(mViewModel.viewStateLiveData, this::onNewState)
     }
 
     private fun onNewState(state: MineViewState) {
         if (state.throwable != null) {
             // handle throwable.
         }
-
         if (state.userInfo != null) {
             Glide.with(requireContext())
                 .load(state.userInfo.avatarUrl)
