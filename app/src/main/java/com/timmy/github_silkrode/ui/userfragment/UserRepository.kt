@@ -12,37 +12,42 @@ import com.timmy.github_silkrode.api.ServiceManager
 import com.timmy.github_silkrode.db.ReceivedEvent
 import com.timmy.github_silkrode.db.UserDatabase
 import androidx.room.withTransaction
+import com.timmy.github_silkrode.BuildConfig
 import com.timmy.github_silkrode.ext.globalPagingConfig
+import util.logi
 
 class UserRepository @Inject constructor(
     remoteDataSource: UserRemoteDataSource,
     localDataSource: UserLocalDataSource
-) : BaseRepositoryBoth<UserRemoteDataSource, UserLocalDataSource>(remoteDataSource,localDataSource) {
+) : BaseRepositoryBoth<UserRemoteDataSource, UserLocalDataSource>(remoteDataSource, localDataSource) {
 
     @ExperimentalPagingApi
     fun fetchPager(): Pager<Int, ReceivedEvent> {
         val username: String = UserManager.INSTANCE!!.login
         val remoteMediator = UserRemoteMediator(username, remoteDataSource, localDataSource)
         return Pager(
-                config = globalPagingConfig,
-                remoteMediator = remoteMediator,
-                pagingSourceFactory = { localDataSource.fetchPagedListFromLocal() }
+            config = globalPagingConfig,
+            remoteMediator = remoteMediator,
+            pagingSourceFactory = { localDataSource.fetchPagedListFromLocal() }
         )
     }
 }
 
 class UserRemoteDataSource @Inject constructor(private val serviceManager: ServiceManager) : IRemoteDataSource {
 
-    suspend fun queryReceivedEvents(username: String,
-                                    pageIndex: Int,
-                                    perPage: Int): List<ReceivedEvent> {
-        return serviceManager.userService.queryReceivedEvents(username, pageIndex, perPage)
+    suspend fun queryReceivedEvents(
+        username: String,
+        pageIndex: Int,
+        perPage: Int
+    ): List<ReceivedEvent> {
+        val auth = "token ${BuildConfig.USER_ACCESS_TOKEN}"
+        return serviceManager.userService.queryReceivedEvents(auth, pageIndex, perPage)
     }
 }
 
 @SuppressLint("CheckResult")
 class UserLocalDataSource @Inject constructor(private val db: UserDatabase) : ILocalDataSource {
-//
+    //
     fun fetchPagedListFromLocal(): PagingSource<Int, ReceivedEvent> {
         return db.userReceivedEventDao().queryEvents()
     }
@@ -95,6 +100,7 @@ class UserRemoteMediator(
                 }
             }
             val data = remoteDataSource.queryReceivedEvents(username, pageIndex, PAGING_REMOTE_PAGE_SIZE)
+            logi("userRepository取資料", "取到的結果是===>$data")
             if (loadType == LoadType.REFRESH) {
                 localDataSource.clearAndInsertNewData(data)
             } else {

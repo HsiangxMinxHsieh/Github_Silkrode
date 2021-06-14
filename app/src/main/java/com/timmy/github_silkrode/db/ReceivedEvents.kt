@@ -9,6 +9,7 @@ import util.toJson
 @Entity(tableName = "user_received_events")
 data class ReceivedEvent(
     @PrimaryKey
+    @ColumnInfo(name = "id")
     val id: Long = 0,
 
     @ColumnInfo(name = "url")
@@ -18,27 +19,30 @@ data class ReceivedEvent(
     val avatarUrl: String = "",
 
     @ColumnInfo(name = "login")
-    val login: String = "", // Simple Name
+    val login: String = "",     // Simple Name
 
-    @ColumnInfo(name = "name")
-    val name: String = "", // Full Name
+//    @ColumnInfo(name = "name")
+//    val name: String = "",      // Full Name
 
-    @ColumnInfo(name ="location")
+    @ColumnInfo(name = "location")
     val location: String = "",
 ) {
     var indexInResponse: Int = -1
 }
+
 data class Actor(
     @SerializedName("id")
-    val actorId: Int,
-    val login: String,
-    @SerializedName("display_login")
-    val displayLogin: String,
-    @SerializedName("gravatar_id")
-    val gravatarId: String,
+    val actorId: Long,
+    @SerializedName( "login")
+    val login: String,          // Simple Name
+//    @SerializedName("name")
+//    val name: String = "",      // Full Name
+    @SerializedName("url")
     val url: String,
     @SerializedName("avatar_url")
-    val avatarUrl: String
+    val avatarUrl: String,
+    @SerializedName( "location")
+    val location: String = ""
 )
 
 data class ReceivedEventRepo(
@@ -94,12 +98,6 @@ enum class Type {
     TeamAddEvent
 }
 
-val SUPPORT_EVENT_TYPES: List<Type> = listOf(
-    Type.WatchEvent,
-    Type.ForkEvent,
-    Type.PushEvent,
-    Type.CreateEvent
-)
 
 class ReceivedEventsPersistentConverter {
 

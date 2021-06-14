@@ -23,15 +23,14 @@ import util.logi
 class MainRepository @Inject constructor(
     remoteDataSource: UserRemoteDataSource,
     localDataSource: UserLocalDataSource
-) : BaseRepositoryBoth<UserRemoteDataSource, UserLocalDataSource>(remoteDataSource,localDataSource) {
+) : BaseRepositoryBoth<UserRemoteDataSource, UserLocalDataSource>(remoteDataSource, localDataSource) {
 
     suspend fun login(): Results<UserInfo> {
-        // 保存用户登录信息
-//        localDataSource.savePrefUser()
         val userInfo = remoteDataSource.login()
-//        // 如果登录失败，清除登录信息
         when (userInfo) {
-            is Results.Failure -> {  logi("login","fail!")           }
+            is Results.Failure -> {
+                logi("login", "fail!")
+            }
             is Results.Success -> UserManager.INSTANCE = requireNotNull(userInfo.data)
         }
         return userInfo
@@ -44,7 +43,7 @@ class UserRemoteDataSource @Inject constructor(
 
     suspend fun login(): Results<UserInfo> {
         val auth = "token ${BuildConfig.USER_ACCESS_TOKEN}"
-        logi("login","auth===>$auth")
+        logi("login", "auth===>$auth")
         return processApiResponse { serviceManager.userService.fetchUserOwner(auth) }
     }
 }

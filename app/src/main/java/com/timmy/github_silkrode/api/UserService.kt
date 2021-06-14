@@ -10,7 +10,7 @@ interface UserService {
     suspend fun fetchUserOwner(@Header("Authorization") authorization: String): Response<UserInfo>
 
     @GET("users")
-    suspend fun queryReceivedEvents(@Path("username") username: String,
+    suspend fun queryReceivedEvents(@Header("Authorization") authorization: String,
                                     @Query("page") pageIndex: Int,
                                     @Query("per_page") perPage: Int): List<ReceivedEvent>
 
