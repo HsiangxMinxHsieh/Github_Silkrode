@@ -1,45 +1,44 @@
 package com.timmy.github_silkrode.di
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import com.timmy.github_silkrode.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object HttpModule {
-    const val TIME_OUT_SECONDS = 10L
-    const val BASE_URL = "https://api.github.com/"
+object HttpModule{
 
     @Provides
-    @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-    }
+    fun provideBaseUrl() = "https://api.github.com/"
 
-    @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .readTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
-            .connectTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
+    @Provides
+    fun provideOkHttpClient() = if (BuildConfig.DEBUG){
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }else{
+        OkHttpClient
+            .Builder()
             .build()
     }
 
-    @Provides
     @Singleton
-    fun provideGson(): Gson {
-        return GsonBuilder().create()
-    }
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient, BASE_URL:String): Retrofit = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(BASE_URL)
+        .client(okHttpClient)
+        .build()
+
+
 }
